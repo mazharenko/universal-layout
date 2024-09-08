@@ -1,6 +1,6 @@
 KBD	RU-UL	"Russian - Universal Layout"
 
-COPYRIGHT	"(c) 2024 mazharenko"
+COPYRIGHT	"(c) {{ date.now.year }} mazharenko"
 
 COMPANY	"mazharenko"
 
@@ -8,7 +8,7 @@ LOCALENAME	"ru-RU"
 
 LOCALEID	"00000419"
 
-VERSION	1.0
+VERSION	{{ version }}
 
 SHIFTSTATE
 
