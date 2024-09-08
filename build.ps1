@@ -12,10 +12,16 @@ $platforms = @(
 )
 
 foreach ($layout in $layouts) {
-	mkdir (Join-Path $PSScriptRoot "build/msi/$layout/i386") -Force
+
 	Set-Location (Join-Path $PSScriptRoot "build/msi/$layout")
+
+	&dotnet fsi (Join-Path $PSScriptRoot "src/render.fsx") -- "$layout" --layout-version 1.0
+	if (!($?)) {
+		throw "render.fsx failed"	
+	}
 	
 	foreach ($platform in $platforms) {
+		mkdir (Join-Path $PSScriptRoot "build/msi/$layout/$($platform.Name)") -Force
 		Set-Location "$($platform.Name)"
 		&(Join-Path $PSScriptRoot "build/tools/msklc/bin/i386/kbdutool.exe") -v $($platform.Switch) (Join-Path $PSScriptRoot "src/$layout.klc")
 		if (!($?)) {
