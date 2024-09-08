@@ -15,17 +15,17 @@ $platforms = @(
 
 foreach ($layout in $layouts) {
 
-	Set-Location (Join-Path $PSScriptRoot "build/msi/$layout")
+	Set-Location (Join-Path $PSScriptRoot "msi/$layout")
 
-	&dotnet fsi (Join-Path $PSScriptRoot "src/render.fsx") -- "$layout" --layout-version $version
+	&dotnet fsi (Join-Path $PSScriptRoot "../src/render.fsx") -- "$layout" --layout-version $version
 	if (!($?)) {
 		throw "render.fsx failed"	
 	}
 	
 	foreach ($platform in $platforms) {
-		mkdir (Join-Path $PSScriptRoot "build/msi/$layout/$($platform.Name)") -Force
+		mkdir (Join-Path $PSScriptRoot "msi/$layout/$($platform.Name)") -Force
 		Set-Location "$($platform.Name)"
-		&(Join-Path $PSScriptRoot "build/tools/msklc/bin/i386/kbdutool.exe") -v $($platform.Switch) (Join-Path $PSScriptRoot "src/$layout.klc")
+		&(Join-Path $PSScriptRoot "tools/msklc/bin/i386/kbdutool.exe") -v $($platform.Switch) (Join-Path $PSScriptRoot "../src/$layout.klc")
 		if (!($?)) {
 			throw "kbdutool failed"	
 		}
