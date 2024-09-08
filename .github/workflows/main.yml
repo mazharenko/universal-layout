@@ -9,6 +9,10 @@ env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
   DOTNET_NOLOGO: true
   LayoutVersion: ${{ github.ref_name }}
+  GH_DEBUG: 1
+
+permissions:
+  contents: write
 
 defaults:
   run:
@@ -30,8 +34,11 @@ jobs:
       - name: Build
         run: ./build.ps1 ${{ env.LayoutVersion }}
 
+      - name: Zip release
+        run: Compress-Archive .\build\msi\* release.zip
+
       - name: Create release
-        run: gh release create ${{ env.LayoutVersion }} ./build/msi/*.*
+        run: gh release create --verify-tag ${{ env.LayoutVersion }} release.zip
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
