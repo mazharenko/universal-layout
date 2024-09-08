@@ -1,3 +1,5 @@
+param([Parameter(Mandatory)] [String] $version) 
+
 $ErrorActionPreference = "Stop";
 
 $layouts = @(
@@ -15,7 +17,7 @@ foreach ($layout in $layouts) {
 
 	Set-Location (Join-Path $PSScriptRoot "build/msi/$layout")
 
-	&dotnet fsi (Join-Path $PSScriptRoot "src/render.fsx") -- "$layout" --layout-version 1.0
+	&dotnet fsi (Join-Path $PSScriptRoot "src/render.fsx") -- "$layout" --layout-version $version
 	if (!($?)) {
 		throw "render.fsx failed"	
 	}
