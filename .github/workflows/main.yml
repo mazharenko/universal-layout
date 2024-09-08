@@ -32,4 +32,6 @@ jobs:
 
       - name: Create release
         run: gh release create ${{ env.LayoutVersion }} ./build/msi/*.*
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
