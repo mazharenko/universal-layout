@@ -18,4 +18,4 @@ let outDir = Input.OptionMaybe<string>("--out-dir")
 rootCommand fsi.CommandLineArgs[1..] {
     inputs (layout, version, outDir)
     setHandler run
-}
+} |> exit
