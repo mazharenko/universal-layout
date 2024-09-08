@@ -35,10 +35,10 @@ jobs:
         run: ./build/build.ps1 ${{ env.LayoutVersion }}
 
       - name: Zip release
-        run: Compress-Archive .\build\msi\* release.zip
+        run: Compress-Archive .\build\msi\* UniversalLayout.${{ env.LayoutVersion }}.zip
 
       - name: Create release
-        run: gh release create --verify-tag ${{ env.LayoutVersion }} release.zip
+        run: gh release create --verify-tag --notes "" ${{ env.LayoutVersion }} UniversalLayout.${{ env.LayoutVersion }}.zip
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
