@@ -24,10 +24,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
       
@@ -38,7 +38,7 @@ jobs:
         run: Compress-Archive .\build\msi\* UniversalLayout.${{ env.LayoutVersion }}.zip
 
       - name: Create release
-        run: gh release create --verify-tag --notes "" ${{ env.LayoutVersion }} UniversalLayout.${{ env.LayoutVersion }}.zip
+        run: gh release create --verify-tag ${{ env.LayoutVersion }} UniversalLayout.${{ env.LayoutVersion }}.zip
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
