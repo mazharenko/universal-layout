@@ -5,6 +5,7 @@ $ErrorActionPreference = "Stop";
 $layouts = @(
 	"RU-UL"
 	"EN-UL"
+	"UK-UL"
 )
 $platforms = @(
 	@{ Name = "i386"; Switch = "-x" }
