@@ -1,3 +1,6 @@
+
+[![Latest Release](https://img.shields.io/github/v/release/mazharenko/universal-layout)](https://github.com/mazharenko/universal-layout/releases/latest)
+
 Английская, русская и украинская раскладки для Windows, повторяющие по возможности [Universal Layout для MacOS от tonsky](https://github.com/tonsky/Universal-Layout).
 
 # Английская раскладка
